@@ -3,29 +3,28 @@
 
 #include "Enemy.h"
 
-#include "Components/BoxComponent.h"
-
-APawn* PlayerPawn;
-
 // Sets default values
 AEnemy::AEnemy()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	auto Box = CreateDefaultSubobject<UBoxComponent>(FName("Box"));
+	Box = CreateDefaultSubobject<UBoxComponent>(FName("Box"));
 	RootComponent = Box;
+	Box->SetCollisionProfileName(TEXT("Enemy"));
 	
-	auto StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMesh"));
+	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMesh"));
 	StaticMesh->SetupAttachment(RootComponent);
+
+	Speed = 250.0f;
 }
 
 // Called when the game starts or when spawned
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	if (PlayerPawn == nullptr)
+
+	if (GetWorld() != nullptr && GetWorld()->GetFirstPlayerController() != nullptr)
 	{
 		PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
 	}
@@ -37,8 +36,8 @@ void AEnemy::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	if (PlayerPawn == nullptr) return;
-	
-	auto dir = (PlayerPawn->GetActorLocation() - GetActorLocation()).Normalize();
-	SetActorLocationAndRotation(GetActorLocation() + dir * Speed, FRotator::ZeroRotator);
+
+	const FVector Direction = (PlayerPawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
+	SetActorLocation(GetActorLocation() + Direction * Speed * DeltaTime, true);
 }
 

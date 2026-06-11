@@ -31,4 +31,19 @@ public:
 	UBoxComponent* Box;
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* StaticMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float Speed = 2000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float LifeTime = 3.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	FVector MoveDirection = FVector(0.0f, 0.0f, 1.0f);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
+	class USoundBase* ImpactSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effect")
+	class UNiagaraSystem* HitEffect;
 };

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
 #include "Enemy.generated.h"
 
 UCLASS()
@@ -23,6 +24,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
-	UPROPERTY(blueprintreadwrite, EditAnywhere)
-	float Speed;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UBoxComponent* Box;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UStaticMeshComponent* StaticMesh;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Movement")
+	float Speed = 250.0f;
+
+private:
+	UPROPERTY()
+	APawn* PlayerPawn;
 };
