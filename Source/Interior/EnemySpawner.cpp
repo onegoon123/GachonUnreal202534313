@@ -97,8 +97,7 @@ FVector AEnemySpawner::GetSpawnLocation() const
 		}
 	}
 
-	const float RandomY = FMath::RandRange(-SpawnRadius, SpawnRadius);
-	return GetActorLocation() + FVector(0.0f, RandomY, 0.0f);
+	return GetActorLocation();
 }
 
 void AEnemySpawner::StartNextWave()

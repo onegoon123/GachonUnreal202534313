@@ -82,7 +82,7 @@ void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	SetActorLocation(GetActorLocation() + MoveDirection.GetSafeNormal() * Speed * DeltaTime, true);
+	SetActorLocation(GetActorLocation() + MoveDirection * Speed * DeltaTime, true);
 }
 
 void ABullet::Attack(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

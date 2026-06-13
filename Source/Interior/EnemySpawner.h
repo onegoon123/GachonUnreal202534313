@@ -30,9 +30,6 @@ public:
 	float SpawnInterval = 2.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawning")
-	float SpawnRadius = 800.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawning")
 	TArray<AActor*> SpawnPoints;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave")
